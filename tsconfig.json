@@ -1,6 +1,7 @@
 {
   "files": [],
   "include": ["vite-env.d.ts", "src/**/*", "src/**/*.vue"],
+  "exclude": ["node_modules"],
   "references": [
     {
       "path": "./tsconfig.node.json"
@@ -8,5 +9,11 @@
     {
       "path": "./tsconfig.app.json"
     }
-  ]
+  ],
+  "compilerOptions": {
+    "baseUrl": "./",
+    "paths": {
+      "@/*": ["./src/*"]
+    }
+  }
 }

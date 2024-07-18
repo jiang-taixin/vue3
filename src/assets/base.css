@@ -97,3 +97,10 @@ body {
   line-height: 50px;
 }
 
+.container{
+  width: 100%;
+  border-radius: 10px;
+  background-color: cornflowerblue;
+  padding: 0 0 10px;
+  box-shadow: 0 0 2px;
+}

@@ -8,10 +8,26 @@
     </p>
     <p>names数据有:{{count}}</p>
     <a-button @click="addName">增加</a-button>
-    <p v-for="item of names">{{item}}</p>
+    <p v-for="(item,index) of names" :key="index">{{item}}</p>
     <a-divider />
 
-
+    <div class="container">
+      <a-flex vertical>
+        <a-row :span="24" >
+          <a-col :span="4" align="center">姓名</a-col>
+          <a-col :span="20">
+            <a-input v-model:value="userInfo.name"></a-input>
+          </a-col>
+        </a-row>
+        <a-row :span="24" justify="center">
+          <a-col :span="4" align="center" >年龄</a-col>
+          <a-col :span="20">
+            <a-input v-model:value="userInfo.age"></a-input>
+          </a-col>
+        </a-row>
+        <p>用户信息：{{userMsg}}</p>
+      </a-flex>
+    </div>
   </a-flex>
 
 </template>
@@ -29,10 +45,13 @@ const count = computed(() => {
   return names.value.length
 })
 
-watch(
-  () => count.value,
+const stopWatch = watch(count,
   (newValue, oldValue) =>{
     console.log(`变化了, new:${newValue}, old:${oldValue}`)
+    if(newValue > 2){
+      // 结束watch
+      stopWatch();
+    }
   }
 )
 
@@ -48,6 +67,15 @@ const count1 = computed({
 function addName(){
   names.value.push(`name ${names.value.length}`)
 }
+
+// 尚硅谷示例
+const userInfo = ref({
+  name:"张三",
+  age: 30
+})
+let userMsg = computed(() => {
+  return `${userInfo.value.name} -- ${userInfo.value.age}`
+})
 
 
 </script>

@@ -71,6 +71,12 @@ const items = ref([
     label: '依赖注入',
     title: '依赖注入',
   },
+  {
+    key: '/mypinia',
+    icon: () => h(SettingOutlined),
+    label: 'pinia状态管理',
+    title: 'pinia状态管理',
+  },
 ]);
 
 const clickItem:MenuProps['onClick'] = (e:any) =>{
