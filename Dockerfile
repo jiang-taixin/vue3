@@ -1,6 +1,6 @@
-FROM node AS build-stage
+FROM node:20.11-alpine3.19 AS build-stage
 
-ENV NPM_CONFIG_REGISTRY=https://registry.npm.taobao.org
+RUN npm config set registry https://registry.npmmirror.com
 
 WORKDIR /app
 COPY package*.json ./
@@ -10,8 +10,8 @@ RUN npm install
 COPY . .
 RUN npm run build
 
-FROM nginx
+FROM nginx:stable-alpine
 
-COPY --from=build-stage dist/ /app/nghtml
+COPY --from=build-stage /app/dist/ /usr/share/nginx/html
 
 EXPOSE 80
